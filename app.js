@@ -1,27 +1,79 @@
 let btn = document.getElementById("submit")
-let cities = ["Ahmedabad", "Ayodhya", "Varanasi", "Mumbai", "Jaipur"];
-let ul = document.getElementById("descriptionList");
+let div = document.getElementById("detail");
+let cityNameDiv = document.getElementById("cityName");
 
-let cityObj = {
-    Ahmedabad : {
-        "Kankariya Lack" : "Ahmedabad Kankariya lack",
-        "Adalaj ni vaav" : "Near chandkheda",
-        "Trimandir" : "After adalaj ni vaav",
-        "Atal Bridge" : "Riverfront",
+let cityArr = [
+    {
+        title: "Ahmedabad",
+        description: {
+            place1: {
+                name: "Kankariya Lack",
+                image: "/Photos/kankariya.jpeg",
+                description: "It is amazing place",
+            },
+            place2: {
+                name: "Adalaj",
+                image: "/Photos/adalaj.jpg",
+                description: "Near Chandkheda"
+            },
+            place3: {
+                name: "Sabarmati Ashram",
+                image: "/Photos/sabarmatiAshram.jpeg",
+                description: ""
+            },
+            place4: {
+                name: "Atal Bridge",
+                image: "/Photos/atal.jpeg",
+                description: "Near Riverfront"
+            },
+            place5: {
+                name: "Riverfront",
+                image: "/Photos/riverfront.jpeg",
+                description: "Near Atal Bridge"
+            },
+        },
     },
-    Ayodhya : {
-        "RamMandir": "Ram mandir"
+
+    {
+        title: "Ayodhya",
+        description: {
+            place1: {
+                name: "Ram Mandir",
+                description: "22 Jan 2024"
+            }
+        }
     },
-    Varanasi : {
-        "Mathura": "Mathura"
-    }, 
-    Mumbai : {
-        "film": "Film city"
+
+    {
+        title: "Varanasi",
+        description: {
+            place1: {
+                name: "Mathura",
+                description: "mathura"
+            }
+        }
     },
-    Jaipur : {
-        "Rajasthan": "Rajasthan, India"
+
+    {
+        title: "Mumbai",
+        description: {
+            place1: {
+                name: "Film city",
+                description: "Goregaon east"
+            }
+        }
+    },
+
+    {
+        title: "Jaipur",
+        description: {
+            place1: {
+                name: "Jaipur",
+                description: "Rajasthan"
+            }
+        }
     }
-};
+];
 
 btn.addEventListener("click", (evt) => {
     let userInput = document.getElementById("myInput");
@@ -32,46 +84,51 @@ btn.addEventListener("click", (evt) => {
     evt.preventDefault();
 });
 
-
+let resetData = () => {
+    div.innerText = "";
+    cityNameDiv.innerText = "";
+}
 let checkCity = (city) => {
-    let matchCity = false;
+    resetData();
 
-    for(idx of cities) {
-        if(idx == city) {
+    let matchCity = false;
+    for(idx of cityArr) {
+        if(city == idx.title) {
             matchCity = true;
             break;
         }
     }
 
     if(matchCity) {
-        // console.log("Found");
-        cityDiscription(city);
+        console.log("Found");
+        cityData(city);
     }
     else {
         console.log("NOT Found");
-        ul.innerText = "City not found!!!";
+        div.innerText = "City not found!!!";
     }
 }
 
-let cityDiscription = (inputData) => {
-    if(cityObj.hasOwnProperty(inputData)) {
-        // console.log(cityObj[inputData]);
-        // ul.innerText = cityObj[inputData];
+let cityData = (inputData) => {
 
-        for(const objKey in cityObj) {
-            // console.log(objKey);
-            if(inputData == objKey) { // objKey --> city name..
-                ul.innerHTML = `<h4>${objKey}</h4>`;
-                
-                for(const innerKey in cityObj[objKey]) {
-                    if(cityObj[objKey].hasOwnProperty(innerKey)) {
-                        let appendChildItem = document.createElement("li");
-                        appendChildItem.innerHTML = `<h5>${innerKey}</h5> ${cityObj[objKey][innerKey]}`;
-                        ul.appendChild(appendChildItem); 
-                    }
-                }
+    for(idx of cityArr) {
+        if(inputData == idx.title) { // idx.title -> ahmedabad, mumbai, varanasi, jaipur, ayodhya.
+            let cityName = document.createElement("div");
+            cityName.innerHTML = `<h3>${idx.title}</h3>`;
+            cityName.classList.add("cityName");
+            cityNameDiv.appendChild(cityName);
+
+            for(let i in idx.description) {
+                // let img = document.createElement("img");
+                // img.src = idx.description[i].image;
+                // img.alt = "Image of the place";
+                // div.appendChild(img);
+
+                let placeName = document.createElement("div");
+                placeName.innerHTML = `<h4>${idx.description[i].name}</h4>  ${idx.description[i].description}`;
+                placeName.classList.add("cards");
+                div.appendChild(placeName);
             }
-
         }
     }
 }
