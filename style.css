@@ -1,28 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+    /* border: 2px solid black; */
+}
+
 h3 {
     font-family: sans-serif;
 }
 
 .containerr {
-    background-color: aqua;
     text-align: center;
 }
 
 .title {
     text-align: center;
-    background-color: gray;
-}
-
-#detail {
-    background-color: lightblue;
-    display: flex;
-    flex-wrap: wrap;
-
-    border: 2px solid black;
-}
-
-#cityName {
-    background-color: darkorchid;
-    align-items: center;
 }
 
 .cityName {
@@ -33,17 +24,18 @@ h3 {
 }
 
 .cards {
-    height: 250px;
-    width: 540px;
     margin-left: 1.5rem;
     margin-top: 1rem;
-    background-color: grey;
-    border: 2px solid red;
     padding: 2px;
-    transition: red 0.9s ease;
 }
 
-.cards:hover {
-    border-radius: 5px;
-    background-color: green;
+.img {
+    height: 150px;
+    width: 300px;
+    margin-right: 20px;
+}
+
+.place-info {
+    margin-left: 10px;
+    display: inline-block;
 }
